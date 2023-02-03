@@ -15,10 +15,10 @@
   !define MUI_FINISHPAGE_NOAUTOCLOSE
 
 ; General
-  Name                  "libwdi-example"
-  OutFile               "libwdi-example-setup.exe"
-  InstallDir            $PROGRAMFILES\libwdi-example
-  InstallDirRegKey      HKLM "Software\libwdi-example" "Install_Dir"
+  Name                  "Proffie STM32 Bootloader driver"
+  OutFile               "proffie-dfu-setup.exe"
+  InstallDir            $PROGRAMFILES\proffie-dfu-setup
+  InstallDirRegKey      HKLM "Software\proffie-dfu-setup" "Install_Dir"
   ShowInstDetails       show
   RequestExecutionLevel admin
 
@@ -32,15 +32,15 @@
   !insertmacro MUI_LANGUAGE "English"
 
 ; Installer
-Section "libwdi-example" SecDummy
+Section "proffie-dfu-setup" SecDummy
   SetOutPath $INSTDIR
   File "wdi-simple.exe"
-  WriteRegStr HKLM SOFTWARE\libwdi-example "Install_Dir" "$INSTDIR"
+  WriteRegStr HKLM SOFTWARE\proffie-dfu-setup "Install_Dir" "$INSTDIR"
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\libwdi-example" "DisplayName" "libwdi example"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\libwdi-example" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\libwdi-example" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\libwdi-example" "NoRepair" 1
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\proffie-dfu-setup" "DisplayName" "libwdi example"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\proffie-dfu-setup" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\proffie-dfu-setup" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\proffie-dfu-setup" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
 SectionEnd
 
@@ -68,15 +68,15 @@ SectionEnd
 ; -h, --help                 display usage
 Section "wdi-simple"
   DetailPrint "Running $INSTDIR\wdi-simple.exe"
-  nsExec::ExecToLog '"$INSTDIR\wdi-simple.exe" --name "XBox Controller" --vid 0x045e --pid 0x0289 --progressbar=$HWNDPARENT --timeout 120000'
+  nsExec::ExecToLog '"$INSTDIR\wdi-simple.exe" --name "STM32  BOOTLOADER" --vid 0x0483 --pid 0xdf11 --progressbar=$HWNDPARENT --timeout 120000 -t0'
 SectionEnd
 
 ; Uninstaller
 Section "Uninstall"
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\libwdi-example"
-  DeleteRegKey HKLM SOFTWARE\libwdi-example
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\proffie-dfu-setup"
+  DeleteRegKey HKLM SOFTWARE\proffie-dfu-setup
   Delete $INSTDIR\wdi-simple.exe
   Delete $INSTDIR\uninstall.exe
-  RMDir "$SMPROGRAMS\libwdi-example"
+  RMDir "$SMPROGRAMS\proffie-dfu-setup"
   RMDir "$INSTDIR"
 SectionEnd

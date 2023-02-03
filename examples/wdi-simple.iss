@@ -11,21 +11,20 @@
 ; - compile and run
 
 [Setup]
-AppName = YourApplication
-AppVerName = YourApplication 0.1.10.2
-AppPublisher = YourApplication
-AppPublisherURL = http://test.url.com/
-AppVersion = 0.1.10.1
-DefaultDirName = {pf}\TestApp
-DefaultGroupName = YourApplication
+AppName = Proffie STM32 BOOTLOADER Driver
+AppVerName = V1.0
+AppPublisher = Proffezzorn
+AppPublisherURL = https://fredrik.hubbe.net/
+AppVersion = 1.0
+DefaultDirName = {commonpf}\DriverInstaller
+DefaultGroupName = Proffie STM32 BOOTLOADER Driver
 Compression = lzma
 SolidCompression = yes
-; Win2000 or higher
-MinVersion = 5,5
 
 ; This installation requires admin privileges. This is needed to install
 ; drivers on windows vista and later.
 PrivilegesRequired = admin
+DisableProgramGroupPage=yes
 
 [Files]
 ; copy the 32bit wdi installer to the application directory.
@@ -59,5 +58,5 @@ Name: "{group}\Uninstall YourApplication"; Filename: "{uninstallexe}"
 ; -l, --log                  set log level (0=debug, 4=none)
 ; -h, --help                 display usage
 ;
-Filename: "{app}\wdi-simple.exe"; Flags: "runhidden"; Parameters: " --name ""XBox Controller"" --vid 0x045e --pid 0x0289 --progressbar={wizardhwnd} --timeout 120000"; StatusMsg: "Installing YourApplication driver (this may take a few seconds) ...";
+Filename: "{app}\wdi-simple.exe"; Flags: "runhidden"; Parameters: " --name ""STM32  BOOTLOADER"" --vid 0x0483 --pid 0xdf11 --progressbar={wizardhwnd} --timeout 120000 -t0"; StatusMsg: "Installing STM32 BOOTLOADER driver (this may take a few seconds) ...";
 
